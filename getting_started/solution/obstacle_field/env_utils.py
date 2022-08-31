@@ -1,9 +1,9 @@
 
 
 #Grid params
-grid_width = 16
-grid_height = 16
-block_size = 30 
+grid_width = 64
+grid_height = 64
+block_size = 10 
 
 #Screen params
 screen_width = grid_width*block_size
