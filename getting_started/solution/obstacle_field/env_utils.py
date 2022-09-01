@@ -13,7 +13,7 @@ screen_height = grid_height*block_size
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (200, 200, 200)
 
-obstacle_occupancy_percent = 10
+obstacle_occupancy_percent = 50
 
 # #Tetrominos
 tetro = [
@@ -39,7 +39,8 @@ tetro = [
 	 [1, 1, 1]],
 	
     #i
-	[[1, 1, 1]],
+	[[1, 1, 1],
+     [0, 0, 0]],
 	
     #dot
 	[[1, 1],

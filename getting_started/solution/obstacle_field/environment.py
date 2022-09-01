@@ -79,23 +79,40 @@ class Grid:
     
     def checkObstacles(self):
         obstacle_counter = 0
+        obstacle_placed = 0
+        print("Obstacle occupnacy required ", self.obstacles_required)
+        while obstacle_counter < self.obstacles_required:
 
-        rand_x_cord = 1
-        rand_y_cord = 0
+            rand_x_cord = rnd.randint(0, self.rows-2)
+            rand_y_cord = rnd.randint(0, self.cols-2)
 
-        # random_tetro_shape = [[1, 0, 0], [1, 1, 1]]
-        random_tetro_shape = rnd.choice(self.tetro)
-        shape_width = len(random_tetro_shape[0]) 
-        shape_height = len(random_tetro_shape)
+            random_tetro_shape = rnd.choice(self.tetro)
+            shape_width = len(random_tetro_shape[0])
+            shape_height = len(random_tetro_shape)
 
-        for r_ in range(0, shape_height):
-            for c_ in range(0, shape_width): 
-                if (not self.isBlockOccupied(r_, c_)):
+            print("Random cords", rand_x_cord, rand_y_cord)
+            print("Shaped widht height ", shape_width, shape_height)
+
+            for r_ in range(rand_x_cord, rand_x_cord+shape_height): 
+                random_tetro_row = r_ - rand_x_cord
+                for c_ in range(rand_y_cord, rand_y_cord+shape_width): 
+                    random_tetro_col = c_ - rand_y_cord
+            
                     print("Current cords", r_, c_)
-                    print("Grid ", self.grid_env[r_][c_])
-                    print(" tetro ", random_tetro_shape[r_][c_])
-                    self.grid_env[r_][c_] = random_tetro_shape[r_][c_]
-                    obstacle_counter += 1  
+                    print("Tetro R C", random_tetro_row, random_tetro_col)
+
+                    if random_tetro_shape[random_tetro_row][random_tetro_col]:
+                            if r_ < (self.rows-1) and c_ < (self.cols-1):
+                                if not self.grid_env[r_][c_]:
+                                    self.grid_env[r_][c_] = 1
+                                    obstacle_counter += 1
+
+                               
+            obstacle_placed += 1
+            print("Tetro shaped placed",obstacle_placed)
+        
+        print("Obstacles filled", obstacle_counter)
+
 
 
 
@@ -128,7 +145,7 @@ class Grid:
                 
                                      
 
-        print("Obstacles filled", obstacle_counter)
+        
                         
                     
     # def embedTetro(self, r_cord_grid, c_cord_grid):
