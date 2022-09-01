@@ -115,57 +115,6 @@ class Grid:
 
 
 
-
-        # while (obstacle_counter < 3):
-        #     # rand_x_cord = rnd.randint(0, self.rows-1)
-        #     # rand_y_cord = rnd.randint(0, self.cols-1)
-        #     rand_x_cord = 1
-        #     rand_y_cord = 0
-
-        #     print("Random x y", rand_x_cord, rand_y_cord)
-           
-
-        #     if(not self.isBlockOccupied(rand_x_cord, rand_y_cord)):
-
-        #         # random_tetro_shape = rnd.choice(self.tetro)
-        #         random_tetro_shape = [[1, 0, 0], [1, 1, 1]]
-        #         print("Got tetro ",random_tetro_shape)
-        #         shape_width = len(random_tetro_shape[0])
-        #         shape_height = len(random_tetro_shape)
-        #         print("Shape dim", shape_width, shape_height)
-        #         g_counter = 0
-
-        #         for r_ in range(rand_x_cord, shape_height):
-        #             for c_ in range(rand_y_cord, shape_width): 
-        #                 if (not self.isBlockOccupied(r_, c_)):
-        #                     print("Block unoccupied")
-        #                     self.grid_env[r_][c_] = random_tetro_shape[r_][c_]
-        #                     obstacle_counter += 1  
-
-                
-                                     
-
-        
-                        
-                    
-    # def embedTetro(self, r_cord_grid, c_cord_grid):
-        
-
-    #     random_tetro_shape = rnd.choice(self.tetro)
-    #     shape_x_dim = len(random_tetro_shape[0])
-    #     shape_y_dim = len(random_tetro_shape)
-    #     g_counter = 0
-    #     for r_ in range(0, shape_x_dim):
-    #         for c_ in range(0, shape_y_dim): 
-    #             if (not isBlockOccupied(r_cord_grid, c_cord_grid+c_)):
-                       
-    #                     self.grid_env[r_cord_grid+g_counter][c_cord_grid+c_] = random_tetro_shape[r_][c_]
-    #         g_counter += 1
-
-    #     print("Got tetro ",random_tetro_shape)
-
-
-
 if __name__ == '__main__':
 
     grid = Grid(grid_width, grid_height, block_size, tetro)
