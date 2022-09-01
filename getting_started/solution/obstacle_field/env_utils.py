@@ -1,9 +1,9 @@
 
 
 #Grid params
-grid_width = 64
-grid_height = 64
-block_size = 10 
+grid_width = 16
+grid_height = 16	
+block_size = 50 
 
 #Screen params
 screen_width = grid_width*block_size
@@ -13,14 +13,14 @@ screen_height = grid_height*block_size
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (200, 200, 200)
 
-obstacle_occupancy_percent = 50
+obstacle_occupancy_percent = 10
 
 # #Tetrominos
 tetro = [
     
     #T
     [[1, 1, 1],
-	 [0, 1, 0]],
+	 [0, 1, 0]	],
 	
     #s
 	[[0, 1, 1],
@@ -39,7 +39,7 @@ tetro = [
 	 [1, 1, 1]],
 	
     #i
-	[[1, 1, 1, 1]],
+	[[1, 1, 1]],
 	
     #dot
 	[[1, 1],
