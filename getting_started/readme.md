@@ -1,5 +1,6 @@
 Getting started assignment
 - [ ] Motion Planning applicaton
 - [x] Turtle graphics start
-- [ ] Recording of ROS Turtlesim
-- [ ] Obstacle field demonstration
+- [x] Recording of ROS Turtlesim
+- [x] Obstacle field demonstration
+- [x] Introduction Motion Planning Application
