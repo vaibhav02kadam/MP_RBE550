@@ -1,9 +1,9 @@
 RBE 550 Motion Planning
-# HW1 Getting Started
+# HW0 Getting Started
 
 
 1. Motion Planning Application
-   Please find PDF motion_planning_application.pdf
+   Please find PDF HWO_Motion_Planning_Application.pdf
 
 2. Turtle Graphics victor sierra pattern 
    
