@@ -49,6 +49,8 @@ class Grid:
         self.rows = len(self.grid_env[0])
         self.cols = len(self.grid_env)
 
+        return self.grid_env
+
         
     def isBlockOccupied(self, x, y) -> bool:
         if self.grid_env[x][y] == 1 :   
@@ -70,6 +72,7 @@ class Grid:
             for y_ in range(0, self.cols):
                 if x_ == rand_x_cord and y_ == rand_y_cord:
                     self.grid_env[x_][y_] = 1
+
     
     def checkObstacles(self):
         obstacle_counter = 0
