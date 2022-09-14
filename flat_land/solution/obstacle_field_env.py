@@ -20,6 +20,8 @@ class Grid:
         self.obstacle_occupancy = obstacle_occupancy_percent/100
         self.obstacles_required = round(self.obstacle_occupancy*(self.grid_width*self.grid_height))
 
+
+        self.getGridEnv()
         print("Intiliasing Environment with Grid ")
 
     def drawGrid(self):
@@ -51,6 +53,22 @@ class Grid:
 
         return self.grid_env
 
+
+    def getAdjacentNodes(self):
+        adj_nodes = {}
+        for i in range(self.rows):
+            for j in range(self.cols):
+                for delta in [1, -1]:
+                    #Checking for North and South
+                    if (i+delta) < self.rows or (i+delta) < self.cols:
+                        if not self.isBlockOccupied(i+delta, j):
+                            adj_nodes[(i, j)] = [(i+delta, j)] 
+
+                    if (j+delta) < self.rows or (j+delta) < self.cols:
+                        if not self.isBlockOccupied(i+delta, j):
+                            adj_nodes[(i, j)] = [(i+delta, j)] 
+
+        return adj_nodes    
         
     def isBlockOccupied(self, x, y) -> bool:
         if self.grid_env[x][y] == 1 :   
@@ -60,21 +78,6 @@ class Grid:
 
     
     def getObstacles(self):
-       
-        
-        random_tetro_shape = rnd.choice(self.tetro)
-        rand_x_cord = rnd.randint(0, len(self.grid_env[0]))
-        rand_y_cord = rnd.randint(0, len(self.grid_env))
-
-        random_rotation = rnd.choice([90, 180, 270,360])
-
-        for x_ in range(0, self.rows):
-            for y_ in range(0, self.cols):
-                if x_ == rand_x_cord and y_ == rand_y_cord:
-                    self.grid_env[x_][y_] = 1
-
-    
-    def checkObstacles(self):
         obstacle_counter = 0
         obstacle_placed = 0
 
@@ -98,12 +101,13 @@ class Grid:
                                 if not self.grid_env[r_][c_]:
                                     self.grid_env[r_][c_] = 1
                                     obstacle_counter += 1
-
                                
             obstacle_placed += 1
-        #     print("Tetro shaped placed",obstacle_placed)
-        
-        # print("Obstacles filled", obstacle_counter)
+    
+
+    def displayPos(self, x_, y_, color):
+        rect = pygame.Rect(x_*block_size, y_*block_size, block_size, block_size)
+        pygame.draw.rect(self.screen, color, rect, 0)
 
 
 

@@ -1,9 +1,11 @@
 
+import random
+import math
 
 #Grid params
-grid_width = 32
-grid_height = 32	
-block_size = 20 
+grid_width = 16
+grid_height = 16	
+block_size = 50 
 
 #Screen params
 screen_width = grid_width*block_size
@@ -11,7 +13,11 @@ screen_height = grid_height*block_size
 
 #Colors
 COLOR_BLACK = (0, 0, 0)
-COLOR_WHITE = (200, 200, 200)
+COLOR_WHITE = (255, 255, 255)
+COLOR_GREEN = (0, 200, 0)
+COLOR_RED = (200, 0, 0)
+COLOR_AQUA = (0,255,255)
+COLOR_LIGHTBLUE = (100,149,237)
 
 obstacle_occupancy_percent = 10
 
@@ -47,3 +53,4 @@ tetro = [
 	 [1, 1]]
 
 ]
+
