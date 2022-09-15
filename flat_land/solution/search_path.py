@@ -12,6 +12,7 @@ class BreadthFirstSearch:
         self.grid_env = grid.grid_env
         self.visited = {}
         self.level = {}
+        self.parent = {}
         self.bfs_trasversal_output =[]
         self.adj_list = {}
         self.queue = Queue()
@@ -21,25 +22,35 @@ class BreadthFirstSearch:
 
     def findPath(self):
         c = 0
-        self.visited[self.source] = 1
+    
+        self.adj_list = self.grid.getAdjacentNodes()
+
+        for node in self.adj_list.keys():
+            self.visited[node] = False
+            self.parent[node] = None
+            self.level[node] = -1
+
+        self.visited[self.source] = True
         self.level[self.source] = 0
         self.queue.put(self.source)
 
-        self.adj_list = self.grid.getAdjacentNodes()
+        print("Adjency list", self.adj_list)
 
-        print("Adj list", self.adj_list)
-
-
-        # while not self.queue.empty():
-        #     u = self.queue.get()
-        #     self.bfs_trasversal_output.append(u)
-
-        #     for node in self.adj_list[u]:
-        #         if not self.visited[node]:
-        #             self.visited[node]  = 1
-        #             self.parent[node] = u
-        #             self.level[node] = self.level[u] + 1
-        #             self.queue.put(node)
+        while not self.queue.empty():
+            u = self.queue.get()
+            
+            self.bfs_trasversal_output.append(u)
+            print("adjeceny list of u",u, self.adj_list[u])
+            # for node_ in self.adj_list[u]:
+            #     print("U", u, node_)
+        #         print("Node  adj ", node_)
+                # if not self.visited[node_]:
+                #     self.visited[node_]  = 1
+                #     self.parent[node_] = u
+                #     self.level[node_] = self.level[u] + 1
+                #     self.queue.put(node_)
+        
+        # print(self.bfs_traversal_output)
 
         # while self.target is not None:
         #     self.path.append(self.target)

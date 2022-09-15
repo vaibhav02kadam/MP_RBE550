@@ -58,16 +58,22 @@ class Grid:
         adj_nodes = {}
         for i in range(self.rows):
             for j in range(self.cols):
+
+                if (i, j) not in adj_nodes:
+                    adj_nodes[(i, j)] = []
                 for delta in [1, -1]:
                     #Checking for North and South
-                    if (i+delta) < self.rows or (i+delta) < self.cols:
+                    if (i+delta) >= 0 and (i+delta) < self.rows:
+                        print("Im here got i ", (i+delta), j)
                         if not self.isBlockOccupied(i+delta, j):
-                            adj_nodes[(i, j)] = [(i+delta, j)] 
-
-                    if (j+delta) < self.rows or (j+delta) < self.cols:
-                        if not self.isBlockOccupied(i+delta, j):
-                            adj_nodes[(i, j)] = [(i+delta, j)] 
-
+                            adj_nodes[(i, j)].append((i+delta, j))
+                            # print("Im not blocked", i+delta, j )
+                    #Checking for East and West
+                    if (j+delta) >= 0 and (j+delta) < self.cols:
+                        print("Im here got j ", i, (j+delta))
+                        if not self.isBlockOccupied(i, j+delta):
+                            adj_nodes[(i, j)].append((i, j+delta))
+                print("Finished one node : ", i, j)
         return adj_nodes    
         
     def isBlockOccupied(self, x, y) -> bool:
