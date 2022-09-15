@@ -30,6 +30,8 @@ def main():
 
     planner = BreadthFirstSearch(start_pos, goal_pos, grid) #TODO
     path = planner.findPath()
+
+    print("Grid", grid.grid_env)
    
     #Declare clock to tick robot time steps
     clock = pygame.time.Clock()
