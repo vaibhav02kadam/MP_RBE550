@@ -16,7 +16,7 @@ def main():
 
     #Generate grid N x N
     grid = Grid(screen, grid_width, grid_height, block_size, tetro)
-    # grid.getObstacles()
+    grid.getObstacles()
     grid.drawGrid()
 
     #TODO

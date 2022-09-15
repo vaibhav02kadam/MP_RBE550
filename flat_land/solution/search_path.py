@@ -21,7 +21,6 @@ class BreadthFirstSearch:
         self.path = []
 
     def findPath(self):
-        c = 0
     
         self.adj_list = self.grid.getAdjacentNodes()
 
@@ -51,7 +50,7 @@ class BreadthFirstSearch:
                     self.level[node_] = self.level[u] + 1
                     self.queue.put(node_)
         
-        print(self.bfs_trasversal_output)
+        # print(self.bfs_trasversal_output)
 
         while self.target is not None:
             self.path.append(self.target)
@@ -59,10 +58,10 @@ class BreadthFirstSearch:
         
         self.path.reverse()
 
-        print("Path got",self.path)
+        # print("Path got",self.path)
         self.path.pop(0)
         self.path.pop(len(self.path)-1)
-        
+
         return self.path
         
 
@@ -82,5 +81,9 @@ class Dijkstra:
 
 
 
-
+class RandomPlanner:
+    def __init__(self, source, target, grid_env) -> None:
+        self.source  = source
+        self.target = target
+        self.grid_env = grid_env
         

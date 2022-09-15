@@ -3,8 +3,8 @@ import random
 import math
 
 #Grid params
-grid_width = 16
-grid_height = 16	
+grid_width = 4
+grid_height = 4	
 block_size = 50 
 
 #Screen params
