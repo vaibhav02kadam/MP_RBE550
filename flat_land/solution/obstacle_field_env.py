@@ -58,22 +58,19 @@ class Grid:
         adj_nodes = {}
         for i in range(self.rows):
             for j in range(self.cols):
+                if not self.isBlockOccupied(i,j):
+                    if (i, j) not in adj_nodes:
+                        adj_nodes[(i, j)] = []
+                        for delta in [1, -1]:
+                            #Checking for North and South
+                            if (i+delta) >= 0 and (i+delta) < self.rows:
+                                if not self.isBlockOccupied(i+delta, j) and not self.isBlockOccupied(i,j):
+                                    adj_nodes[(i, j)].append((i+delta, j))
 
-                if (i, j) not in adj_nodes:
-                    adj_nodes[(i, j)] = []
-                for delta in [1, -1]:
-                    #Checking for North and South
-                    if (i+delta) >= 0 and (i+delta) < self.rows and not self.isBlockOccupied(i+delta, j):
-                        print("Im here got i ", (i+delta), j)
-                        if not self.isBlockOccupied(i, j):
-                            adj_nodes[(i, j)].append((i+delta, j))
-
-                    #Checking for East and West
-                    if (j+delta) >= 0 and (j+delta) < self.cols and not self.isBlockOccupied(i, j+delta):
-                        print("Im here got j ", i, (j+delta))
-                        if not self.isBlockOccupied(i, j):
-                            adj_nodes[(i, j)].append((i, j+delta))
-                print("Finished one node : ", i, j)
+                            #Checking for East and West
+                            if (j+delta) >= 0 and (j+delta) < self.cols:
+                                if not self.isBlockOccupied(i, j+delta) and not self.isBlockOccupied(i,j):
+                                    adj_nodes[(i, j)].append((i, j+delta))
         return adj_nodes    
         
     def isBlockOccupied(self, x, y) -> bool:
@@ -112,7 +109,8 @@ class Grid:
     
 
     def displayPos(self, x_, y_, color):
-        rect = pygame.Rect(x_*block_size, y_*block_size, block_size, block_size)
+        # print("X Y", x_, y_)
+        rect = pygame.Rect(y_*block_size, x_*block_size, block_size, block_size)
         pygame.draw.rect(self.screen, color, rect, 0)
 
 

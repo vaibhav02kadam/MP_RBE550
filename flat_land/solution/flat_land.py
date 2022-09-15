@@ -22,7 +22,11 @@ def main():
     #TODO
     #call planner get path
     start_pos = (1,1)
-    goal_pos = (grid.rows-1, grid.cols-1)
+    goal_pos = (grid.rows-2, grid.cols-3)
+    grid.grid_env[1][1] = 0
+    grid.grid_env[grid.rows-2][grid.cols-3] = 0
+
+
 
     #Display start and goal pos
     grid.displayPos(start_pos[0], start_pos[1], COLOR_GREEN)
@@ -31,7 +35,7 @@ def main():
     planner = BreadthFirstSearch(start_pos, goal_pos, grid) #TODO
     path = planner.findPath()
 
-    print("Grid", grid.grid_env)
+    # print("Grid", grid.grid_env)
    
     #Declare clock to tick robot time steps
     clock = pygame.time.Clock()
@@ -48,9 +52,10 @@ def main():
                 running = False
 
         if i < len(path):
-            grid.displayPos(path[i][0], path[i][1], COLOR_AQUA)
-            i = i+1
-            sleep(0.5)    
+                grid.displayPos(path[i][0], path[i][1], COLOR_AQUA)
+               
+                i = i+1
+                sleep(0.5)    
 
 if __name__ == '__main__':
         main()
