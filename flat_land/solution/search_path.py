@@ -41,28 +41,30 @@ class BreadthFirstSearch:
             
             self.bfs_trasversal_output.append(u)
             print("adjeceny list of u",u, self.adj_list[u])
-            # for node_ in self.adj_list[u]:
-            #     print("U", u, node_)
-        #         print("Node  adj ", node_)
-                # if not self.visited[node_]:
-                #     self.visited[node_]  = 1
-                #     self.parent[node_] = u
-                #     self.level[node_] = self.level[u] + 1
-                #     self.queue.put(node_)
+
+            for node_ in self.adj_list[u]:
+                print("U", u, node_)
+                print("Node  adj ", node_)
+                if not self.visited[node_]:
+                    self.visited[node_]  = 1
+                    self.parent[node_] = u
+                    self.level[node_] = self.level[u] + 1
+                    self.queue.put(node_)
         
-        # print(self.bfs_traversal_output)
+        print(self.bfs_trasversal_output)
 
-        # while self.target is not None:
-        #     self.path.append(self.target)
-        #     self.target = self.parent[self.target]
+        while self.target is not None:
+            self.path.append(self.target)
+            self.target = self.parent[self.target]
         
-        # reversed_path = self.path.reverse
+        self.path.reverse()
 
-        # for p in range(reversed_path):
-        #     reversed_path[p] = 1
-
-        # return reversed_path
-        return []
+        print("Path got",self.path)
+        self.path.pop(0)
+        self.path.pop(len(self.path)-1)
+        
+        return self.path
+        
 
 
 class DepthFirstSearch:

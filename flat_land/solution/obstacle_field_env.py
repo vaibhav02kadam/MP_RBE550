@@ -67,7 +67,7 @@ class Grid:
                         print("Im here got i ", (i+delta), j)
                         if not self.isBlockOccupied(i+delta, j):
                             adj_nodes[(i, j)].append((i+delta, j))
-                            # print("Im not blocked", i+delta, j )
+                            
                     #Checking for East and West
                     if (j+delta) >= 0 and (j+delta) < self.cols:
                         print("Im here got j ", i, (j+delta))
