@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import pygame
 from obstacle_field_env import*
-from search_path import BreadthFirstSearch
+from search_path import BreadthFirstSearch, DepthFirstSearch
 from env_utils import*
 from time import sleep
 
@@ -34,7 +34,6 @@ def main():
 
     planner = BreadthFirstSearch(start_pos, goal_pos, grid) #TODO
     path = planner.findPath()
-
     # print("Grid", grid.grid_env)
    
     #Declare clock to tick robot time steps

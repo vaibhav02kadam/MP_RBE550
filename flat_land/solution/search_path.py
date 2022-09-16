@@ -1,6 +1,7 @@
 import math
 from queue import Queue
 import queue
+from turtle import color
 from obstacle_field_env import*
 
 
@@ -80,8 +81,10 @@ class DepthFirstSearch:
         self.dfs_traversal_output = []
         self.time = 0
 
-    def findPath(self):
+        
 
+    def findPath(self):
+        # https://www.youtube.com/watch?v=FvGCzzfdOLw&list=PLEFU6wcpJoWKoGu2GrMDvQcne8ETo02bV&index=5
         self.adj_list = self.grid.getAdjacentNodes()
 
         for node in self.adj_list.keys():
@@ -89,16 +92,30 @@ class DepthFirstSearch:
             self.parent[node] = None
             self.traversal_time[node] = [-1, -1]
 
+        self.callDfs()
 
-    def dfs_util(self, u):
+        return self.dfs_traversal_output
+
+    def dfsUtil(self, u):
         self.color[u] = "G"
         self.traversal_time[u][0] = self.time
         self.dfs_traversal_output.append(u)
+        self.time += 1
 
         for v in self.adj_list[u]:
-            if self.color[v] = "W":
-                self.parent[v] = u
-                self.dfs_util(v)
+            if v != self.target:
+                if self.color[v] == "W":
+                    self.parent[v] = u
+                    self.dfsUtil(v)
+
+        self.color[u] = "B"
+        self.traversal_time[u][1] = self.time
+        self.time += 1
+
+    def callDfs(self):
+        for u in self.adj_list.keys():
+            if self.color[u] == "W" and u != self.target:
+                self.dfsUtil(self.source)
 
 
 
