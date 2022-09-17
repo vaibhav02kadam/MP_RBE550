@@ -13,18 +13,16 @@ class Grid:
         self.block_size = block_size
         self.tetro = tetro
         self.grid_env = []
-
         self.screen_width = self.grid_width*self.block_size
         self.screen_height = self.grid_height*self.block_size
-
         self.obstacle_occupancy = obstacle_occupancy_percent/100
         self.obstacles_required = round(self.obstacle_occupancy*(self.grid_width*self.grid_height))
-
 
         self.getGridEnv()
         print("Intiliasing Environment with Grid ")
 
     def drawGrid(self):
+        """ Draws grid on pygame screen by drawing adjacent rectangles """
 
         for row in range(0, len(self.grid_env[0])):
             for col in range(0, len(self.grid_env)):
@@ -40,7 +38,11 @@ class Grid:
 
 
     def getGridEnv(self):
-        
+        """
+        Returns free space Grid Environment [rows][cols]
+
+        Returns : grid_env (list)
+        """
         #Create free space grid environment
         for _ in range(0, self.grid_height):
             row = []
@@ -55,6 +57,12 @@ class Grid:
 
 
     def getAdjacentNodes(self):
+        """
+        Provides adjacent neighboring nodes of each Node in the grid
+        Check North South East and West of the node. No diagonal nodes
+
+        Returns : adjacent nodes (list)
+        """
         adj_nodes = {}
         for i in range(self.rows):
             for j in range(self.cols):
@@ -74,6 +82,14 @@ class Grid:
         return adj_nodes    
         
     def isBlockOccupied(self, x, y) -> bool:
+        """
+        Returns True if block at x and y occupied
+        Parameters: 
+            x : x coordinate
+            y : y coordinate
+        Returns:
+            True if occupied   
+        """
         if self.grid_env[x][y] == 1 :   
             return True
         else:
@@ -81,6 +97,9 @@ class Grid:
 
     
     def getObstacles(self):
+        """
+            Produces random obstacles in free space grid
+        """
         obstacle_counter = 0
         obstacle_placed = 0
 
@@ -109,7 +128,9 @@ class Grid:
     
 
     def displayPos(self, x_, y_, color):
-        # print("X Y", x_, y_)
+        """
+        Displays rectange for provided block with given color
+        """
         rect = pygame.Rect(y_*block_size, x_*block_size, block_size, block_size)
         pygame.draw.rect(self.screen, color, rect, 0)
 

@@ -3,9 +3,9 @@ import random
 import math
 
 #Grid params
-grid_width = 8
-grid_height = 8	
-block_size = 50 
+grid_width = 64
+grid_height = 64	
+block_size = 10 
 
 #Screen params
 screen_width = grid_width*block_size
@@ -18,8 +18,9 @@ COLOR_GREEN = (0, 200, 0)
 COLOR_RED = (200, 0, 0)
 COLOR_AQUA = (0,255,255)
 COLOR_LIGHTBLUE = (100,149,237)
+COLOR_YELLOW = (204,204,0)
 
-obstacle_occupancy_percent = 10
+obstacle_occupancy_percent = 20
 
 # #Tetrominos
 tetro = [

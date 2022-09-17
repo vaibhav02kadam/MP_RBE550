@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 import pygame
 from obstacle_field_env import*
-from search_path import BreadthFirstSearch, DepthFirstSearch
+from search_path import BreadthFirstSearch, DepthFirstSearch, Dijkstra, RandomPlanner
 from env_utils import*
 from time import sleep
 
-
 def main():
-
-
      #Initialise pygame
     screen = pygame.display.set_mode((screen_width, screen_height))
     screen.fill(COLOR_BLACK)
@@ -19,23 +16,20 @@ def main():
     grid.getObstacles()
     grid.drawGrid()
 
-    #TODO
     #call planner get path
     start_pos = (1,1)
     goal_pos = (grid.rows-2, grid.cols-3)
     grid.grid_env[1][1] = 0
     grid.grid_env[grid.rows-2][grid.cols-3] = 0
 
-
-
     #Display start and goal pos
     grid.displayPos(start_pos[0], start_pos[1], COLOR_GREEN)
     grid.displayPos(goal_pos[0], goal_pos[1], COLOR_RED)
 
-    planner = BreadthFirstSearch(start_pos, goal_pos, grid) #TODO
+    # planner = BreadthFirstSearch(start_pos, goal_pos, grid)
+    planner = Dijkstra(start_pos, goal_pos, grid)
     path = planner.findPath()
-    # print("Grid", grid.grid_env)
-   
+    
     #Declare clock to tick robot time steps
     clock = pygame.time.Clock()
 
@@ -52,6 +46,7 @@ def main():
 
         if i < len(path):
                 grid.displayPos(path[i][0], path[i][1], COLOR_AQUA)
+                grid.displayPos(path[i-1][0], path[i-1][1], COLOR_YELLOW)
                
                 i = i+1
                 sleep(0.5)    

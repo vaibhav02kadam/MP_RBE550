@@ -1,0 +1,6 @@
+DFS  https://www.youtube.com/watch?v=FvGCzzfdOLw&list=PLEFU6wcpJoWKoGu2GrMDvQcne8ETo02bV&index=5
+
+
+Dijkstra  # https://www.youtube.com/watch?v=GazC3A4OQTE
+    # http://www.gitta.info/Accessibiliti/en/html/Dijkstra_learningObject1.html
+
