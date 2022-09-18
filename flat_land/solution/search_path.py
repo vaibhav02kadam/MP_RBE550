@@ -1,3 +1,4 @@
+from collections import deque
 import math
 from queue import Queue, PriorityQueue
 from obstacle_field_env import*
@@ -73,12 +74,15 @@ class DepthFirstSearch:
     def __init__(self, source, target, grid) -> None:
         self.source  = source
         self.target = target
-        self.grid= grid
-        self.color = {}  #White not visited at all,   #Grey vertex visited #Black Vertex and adjanecy explored 
-        self.parent ={}
-        self.traversal_time = {}
-        self.dfs_traversal_output = []
-        self.time = 0        
+        self.grid= grid    
+        self.visited = {}
+        self.parent = {}
+        self.grid_env = self.grid.grid_env
+        self.deq = deque()
+        self.rows = len(self.grid_env[0])
+        self.cols = len(self.grid_env)
+        self.path = []
+        self.trav_path = []
 
     def findPath(self):
         """ Key function for searching path in planner
@@ -86,39 +90,41 @@ class DepthFirstSearch:
         self.adj_list = self.grid.getAdjacentNodes()
 
         for node in self.adj_list.keys():
-            self.color[node] = "W"
+            self.visited[node] = False
             self.parent[node] = None
-            self.traversal_time[node] = [-1, -1]
 
-        self.callDfs()
+        node = self.source
+        self.visited[self.source] = True
+        self.trav_path.append(self.source)
+        self.deq.append(self.source)
 
-        return self.dfs_traversal_output
+        while len(self.deq):
 
-    def dfsUtil(self, u):
-        """ Utility function for recursively planning path
-        """
-        self.color[u] = "G"
-        self.traversal_time[u][0] = self.time
-        self.dfs_traversal_output.append(u)
-        self.time += 1
+            u = self.deq.pop()
 
-        for v in self.adj_list[u]:
-            if v != self.target:
-                if self.color[v] == "W":
-                    self.parent[v] = u
-                    self.dfsUtil(v)
+            for node_ in self.adj_list[u]:
 
-        self.color[u] = "B"
-        self.traversal_time[u][1] = self.time
-        self.time += 1
+                if node_ == self.target:
+                    self.visited[node_]  = 1
+                    self.parent[node_] = u
+                    self.trav_path.append(node_)
+                    self.deq.clear()
+                    break
+                
+                if not self.visited[node_]:
+                    self.visited[node_]  = 1
+                    self.parent[node_] = u
+                    self.trav_path.append(node_)
+                    self.deq.append(node_)
 
-    def callDfs(self):
-        for u in self.adj_list.keys():
-            if self.color[u] == "W" and u != self.target:
-                self.dfsUtil(self.source)
-
-
-
+        while self.target is not None:
+            self.path.append(self.target)
+            self.target = self.parent[self.target]
+        
+        self.path.pop()
+        self.path.reverse()
+        
+        return self.path    
 
 class Dijkstra:
     """ 
@@ -202,49 +208,47 @@ class RandomPlanner:
         self.rows = len(self.grid_env[0])
         self.cols = len(self.grid_env)    
         self.path = []    
-        
+
     def findPath(self):
         self.adj_list = self.grid.getAdjacentNodes()
-        self.visited = {key: 0 for key in self.adj_list.keys()}
 
-        node = self.source
+        for node in self.adj_list.keys():
+            self.visited[node] = False
+            self.parent[node] = None
+            self.level[node] = -1
+
         self.visited[self.source] = 1
-        self.trav_path.append(self.source)
+        self.level[self.source] = 0
+        self.queue.put(self.source)
 
-        i = 0 
-        max = 1000
 
-        while node != self.target:
-            still_unvisited = self.getUnvistedNodes(self.visited)
-
-            random_node = random.choice(still_unvisited)
-
-            if self.visited[random_node]:
-                continue
-
-            if random_node == self.target:
-                self.visited[random_node] = 1
-                self.trav_path.append(random_node)
-                self.parent[random_node] = node
-                break
-
-            self.visited[random_node] = 1
-            self.trav_path.append(random_node)
-            node = random_node
+        while not self.queue.empty():
+            u = self.queue.get()
             
-            i += 1
-            print("Iteration", i)
+            self.trav_path.append(u)
 
-            if  i > max:
-                break
+            random.shuffle(self.adj_list[u])
+            for node_ in self.adj_list[u]:
 
-        return self.trav_path
-                
 
-    def getUnvistedNodes(self, visit) :
-        unvisited = []
-        for n in visit.keys():
-            if visit[n] == 0:
-                unvisited.append(n)
-        return unvisited
 
+                if not self.visited[node_]:
+                    self.visited[node_]  = 1
+                    self.parent[node_] = u
+                    self.level[node_] = self.level[u] + 1
+                    self.queue.put(node_)
+
+
+        while self.target is not None:
+            self.path.append(self.target)
+            self.target = self.parent[self.target]
+        
+        self.path.reverse()
+
+        # print("Path got",self.path)
+        if len(self.path) != 0:
+            self.path.pop(0)
+            # self.path.pop(len(self.path)-1)
+
+        return self.path
+        

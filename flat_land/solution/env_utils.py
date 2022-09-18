@@ -3,9 +3,9 @@ import random
 import math
 
 #Grid params
-grid_width = 64
-grid_height = 64	
-block_size = 10 
+grid_width = 128
+grid_height = 128	
+block_size = 6 
 
 #Screen params
 screen_width = grid_width*block_size
@@ -19,6 +19,7 @@ COLOR_RED = (200, 0, 0)
 COLOR_AQUA = (0,255,255)
 COLOR_LIGHTBLUE = (100,149,237)
 COLOR_YELLOW = (204,204,0)
+COLOR_PINK = (204,0,204)
 
 obstacle_occupancy_percent = 20
 
